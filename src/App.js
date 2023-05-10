@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import MySurvey from "./components/MySurvey";
+import LoginForm from "./components/LoginForm";
+import CreateSurvey from "./components/CreateSurvey";
+import AddQuestions from "./components/AddQuestions";
+import Navbar from "./components/Navbar";
+import Sidebar from "./components/Sidebar";
 
-function App() {
+const App = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Router>
+        {isLoggedIn && <Navbar />}
+        {isLoggedIn && <Sidebar />}
+        <Routes>
+          <Route
+            exact
+            path="/"
+            element={<LoginForm setIsLoggedIn={setIsLoggedIn} />}
+          />
+          {isLoggedIn && <Route path="/home" element={<MySurvey />} />}
+          {isLoggedIn && (
+            <Route path="/create-survey" element={<CreateSurvey />} />
+          )}
+          {isLoggedIn && (
+            <Route path="/add-question" element={<AddQuestions />} />
+          )}
+        </Routes>
+      </Router>
     </div>
   );
-}
+};
 
 export default App;
