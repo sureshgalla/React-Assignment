@@ -21,7 +21,7 @@ const App = () => {
             path="/"
             element={<LoginForm setIsLoggedIn={setIsLoggedIn} />}
           />
-          {isLoggedIn && <Route path="/home" element={<MySurvey />} />}
+          {isLoggedIn && <Route path="/dashboard" element={<MySurvey />} />}
           {isLoggedIn && (
             <Route path="/create-survey" element={<CreateSurvey />} />
           )}

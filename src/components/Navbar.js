@@ -4,6 +4,7 @@ import profile from "./Imgs/profile.png";
 import token from "./Imgs/token.png";
 import calender from "./Imgs/calender.png";
 import notification from "./Imgs/notification.png";
+import avatar from "./Imgs/avatar.png";
 
 const Navbar = () => {
   return (
@@ -57,7 +58,14 @@ const Navbar = () => {
         </li>
         <li>
           <div className="flex items-center">
-            <span>avtar Sangeeta</span>
+            <span>
+              <img
+                className="absolute w-10 h-10 rounded-full top-4 ml-[-20px]"
+                src={avatar}
+                alt="Rounded avatar"
+              />{" "}
+              <h3 className="ml-10">Sangeetha</h3>
+            </span>
             <img src={downarrow} alt="" className="ml-3 mr-8" />
           </div>
         </li>

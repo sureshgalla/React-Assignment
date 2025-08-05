@@ -5,9 +5,6 @@ const SurveySentModel = ({ emails, onCancel }) => {
     <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
         <div className="flex items-center justify-center mb-4">
-          <span role="img" aria-label="love" className="text-4xl mr-2">
-            ❤️
-          </span>
           <h2 className="text-lg font-medium text-green-500 mb-">
             Survey Sent Successfully
           </h2>

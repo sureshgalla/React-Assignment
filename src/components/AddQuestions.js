@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import axios from "axios";
 import { SlLike, SlDislike } from "react-icons/sl";
 import Close from "./Imgs/close.png";
+import GirlClock from "./Imgs/girl_clock.png";
 import ShareSurveyModel from "./ShareSurveyModel";
 import { useNavigate } from "react-router-dom";
 
 const AddQuestions = () => {
   const navigate = useNavigate();
+  const [img, setImg] = useState(true);
   const [disable, setDisable] = useState(true);
   const [model, setModel] = useState(false);
   const [cancel, setCancel] = useState(false);
@@ -86,7 +88,7 @@ const AddQuestions = () => {
   // close model
   const cancelModel = (token) => {
     if (token === "hurry") {
-      navigate("/home");
+      navigate("/dashboard");
     } else {
       setModel(false);
     }
@@ -132,6 +134,10 @@ const AddQuestions = () => {
       { optionNumber: 1, value: "" },
       { optionNumber: 2, value: "" },
     ]);
+    setSelectedQuestionType("Single Choice");
+    setCancel(false);
+    setDisable(true);
+    setImg(false);
   };
 
   return (
@@ -152,7 +158,7 @@ const AddQuestions = () => {
         </h1>
         <div className="ml-auto mr-80 m-[-28px]">
           <select
-            className="w-[200px] rounded border border-gray-400 bg-white pl-3 pr-10 py-2 text-sm leading-tight focus:outline-none focus:border-blue-500"
+            className="w-[200px] rounded border border-gray-400 bg-pink-50 pl-3 pr-10 py-2 text-sm leading-tight focus:outline-none focus:border-yellow-500 font-bold"
             value={selectedQuestionType}
             onChange={handleQuestionTypeChange}
           >
@@ -161,7 +167,7 @@ const AddQuestions = () => {
           </select>
         </div>
         <input
-          className="m-8 w-2/3 border-b border-gray-500 border-solid pb-2"
+          className="m-8 w-2/3 border-b border-yellow-500 border-solid pb-2 bg-transparent focus:outline-none placeholder-font-bold"
           placeholder="Type your Question here"
           value={question}
           onChange={(e) => setQuestion(e.target.value)}
@@ -192,19 +198,31 @@ const AddQuestions = () => {
             {options.map((option, index) => (
               <div
                 key={index}
-                className="max-w-xs m-8 border border-yellow-400 rounded px-4 py-2 items-center"
+                className="max-w-xs ml-8 mt-[-20px] border border-yellow-400 rounded px-8 py-8 items-center"
+                onClick={() => console.log("clicked")}
               >
-                {option.icon}
+                <div className="ml-2">{option.icon}</div>
                 <span className="ml-2">{option.value}</span>
               </div>
             ))}
           </div>
         )}
-        <div className="w-[250px] h-[450px] max-w-sm max-h-full bg-white border border-gray-200 rounded-lg shadow-lg p-8 absolute mt-4 right-8 overflow-y-auto scrollbar-thin scrollbar-thumb-yellow-500">
-          <div className="relative w-100 h-500 bg-white p-4 ">
-            <p className="font-bold mb-4">Question List</p>
+        <div className="w-[250px] h-[450px] max-w-sm max-h-full bg-white border border-gray-200 rounded-lg shadow-lg p-8 absolute mt-4 right-8 overflow-y-auto overflow-x-hidden scrollbar-thin scrollbar-thumb-yellow-500">
+          <div className="relative w-100 h-500 bg-white ml-[-15px]">
+            <p className="absolute font-bold mb-4 mt-[-20px]">QUESTIONS LIST</p>
+            <div className="absolute border border-b border-solid-gray-200 top-3 w-full"></div>
+
+            {img && (
+              <div className="absolute mt-20 ml-10  ">
+                <p className="font-gray-500">
+                  Questions asked will be visible here
+                </p>
+                <img src={GirlClock} alt="" className="mt-5" />
+              </div>
+            )}
+
             {questionsList.map((question, index) => (
-              <div key={index} className="w-200 relative">
+              <div key={index} className="w-200 relative ml-8 top-8">
                 <p className="mb-2 border border-yellow-500 rounded-full pl-5 pr-5 w-[220px] bg-pink-100 ml-[-30px] break-words">
                   {question.question}
                 </p>

@@ -34,6 +34,7 @@ const CreateSurvey = () => {
         console.error("Error creating survey", error);
         // handle error here
       });
+    navigate("/add-question");
   };
 
   return (

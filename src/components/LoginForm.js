@@ -29,7 +29,7 @@ const LoginForm = ({ setIsLoggedIn }) => {
       const accessToken = localStorage.getItem("accessToken");
       console.log(response.data);
       if (accessToken) {
-        navigate("/home");
+        navigate("/dashboard");
         setIsLoggedIn(true);
       }
     } catch (error) {

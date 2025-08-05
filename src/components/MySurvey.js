@@ -2,10 +2,17 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import GirlRed from "./Imgs/girl_red.png";
+import Calender from "./Imgs/calendar_list.png";
+import Close from "./Imgs/close.png";
+import { GoKebabVertical } from "react-icons/go";
 
 function MySurvey() {
   const [surveys, setSurveys] = useState([]);
+  const [close, setClose] = useState(true);
 
+  const handleClose = () => {
+    setClose(false);
+  };
   useEffect(() => {
     const fetchSurveys = async () => {
       try {
@@ -35,27 +42,52 @@ function MySurvey() {
           </button>
         </Link>
       </div>
-      <ul className="space-y-4">
+      <ul className="absolute mt-20 space-y-4 w-4/5">
         {surveys.map((survey) => (
           <li
             key={survey.id}
             className="border border-gray-200 rounded-lg shadow-md p-4"
           >
-            <h2 className="font-semibold text-lg mb-2">{survey.survey_name}</h2>
-            <p className="text-gray-500">{survey.survey_update_date}</p>
+            <div className="flex relative">
+              <h2 className="font-semibold text-lg mb-2">
+                {survey.survey_name}
+              </h2>
+              <div className="absolute top-0 right-0">
+                <GoKebabVertical />
+              </div>
+            </div>
+            <div className="flex">
+              <img src={Calender} alt="" />
+              <p className="text-gray-500 ml-2">{survey.survey_update_date}</p>
+            </div>
+            <div className="relative">
+              <button className="absolute right-0 bottom-0 bg-blue-500 text-white font-bold py-2 px-4 rounded">
+                VIEW RESPONSE
+              </button>
+            </div>
           </li>
         ))}
       </ul>
-      <div className="fixed bottom-0 right-0 m-10">
-        <div className="card p-8 shadow-md w-[500px]">
-          <div>Create or answer 10 survey & earn 200</div>
+      {close && (
+        <div className="flex relative">
+          <div className="fixed bottom-0 right-0 m-10">
+            <img
+              src={Close}
+              alt=""
+              className="absolute top-7 right-0"
+              onClick={handleClose}
+            />
+            <div className="card p-8 shadow-md w-[500px]">
+              <div>Create or answer 10 survey & earn 200</div>
+            </div>
+            <img
+              className="absolute top-0 right-8 object-cover"
+              src={GirlRed}
+              alt=""
+            />
+          </div>
         </div>
-        <img
-          src={GirlRed}
-          alt=""
-          className="absolute top-0 right-8 object-cover"
-        />
-      </div>
+      )}
     </div>
   );
 }
